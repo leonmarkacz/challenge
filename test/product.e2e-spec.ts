@@ -67,7 +67,7 @@ describe('ProductController (e2e)', () => {
     if (process.env.NODE_ENV === 'test') {
       await connection.dropDatabase();
       await connection.query(
-        'create table stock(id uuid default uuid_generate_v4() not null constraint "PK_092bc1fc7d860426a1dec5aa8e9" primary key, status varchar not null, "reservationToken" varchar, "productId" varchar not null, "size" integer not null);',
+        'create table stock(id uuid default uuid_generate_v4() not null constraint "PK_092bc1fc7d860426a1dec5aa8e9" primary key, status varchar not null, "reservationToken" varchar, "productId" varchar not null, "size" integer not null);'
       );
       await connection.getRepository<Stock>('stock').save(stockMockData);
     }
