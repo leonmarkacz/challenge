@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { EntityTarget, getConnection, Repository } from 'typeorm';
+import { getConnection, Repository } from 'typeorm';
 
 @Injectable()
 export class EntitySeedService<T, U> {
@@ -7,8 +7,7 @@ export class EntitySeedService<T, U> {
 
   constructor(public entity: T = null, public seedData: U = null) {
     Logger.log(`Started seeding ${this.entity['name']}`, 'EntitySeedService');
-    // @ts-ignore
-    this.repository = getConnection().getRepository(this.entity);
+    this.repository = getConnection().getRepository(this.entity['name']);
     this._seed().then(() => {
       Logger.log(`Finished seeding ${this.entity['name']}`, 'EntitySeedService');
     });
