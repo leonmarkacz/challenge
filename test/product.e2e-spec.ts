@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication, LoggerService } from '@nestjs/common';
+import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 import { Connection } from 'typeorm';
@@ -7,18 +7,9 @@ import { Stock } from '../src/stock/entities/stock.entity';
 import { StockStatusEnum } from '../src/stock/model/stock-status.enum';
 import { validate as uuidValidate } from 'uuid';
 
-class TestLogger implements LoggerService {
-  log(message: string) {}
-  error(message: string, trace: string) {}
-  warn(message: string) {}
-  debug(message: string) {}
-  verbose(message: string) {}
-}
-
 describe('ProductController (e2e)', () => {
   let app: INestApplication;
   let connection: Connection;
-  let db;
 
   const productId = 'test-product-id';
   const stockMockData = [
@@ -65,7 +56,6 @@ describe('ProductController (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    app.useLogger(new TestLogger());
     await app.init();
     if (process.env.NODE_ENV === 'test') {
       connection = app.get(Connection);
@@ -77,7 +67,7 @@ describe('ProductController (e2e)', () => {
     if (process.env.NODE_ENV === 'test') {
       await connection.dropDatabase();
       await connection.query(
-        'create table stock(id uuid default uuid_generate_v4() not null constraint "PK_092bc1fc7d860426a1dec5aa8e9" primary key, status varchar not null, "reservationToken" varchar, "productId" varchar not null, "size" integer not null);'
+        'create table stock(id uuid default uuid_generate_v4() not null constraint "PK_092bc1fc7d860426a1dec5aa8e9" primary key, status varchar not null, "reservationToken" varchar, "productId" varchar not null, "size" integer not null);',
       );
       await connection.getRepository<Stock>('stock').save(stockMockData);
     }
