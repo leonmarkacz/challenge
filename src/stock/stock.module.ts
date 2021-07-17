@@ -1,4 +1,4 @@
-import { Module, OnModuleInit } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { StockService } from './service/stock.service';
 import { StockController } from './controller/stock.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
