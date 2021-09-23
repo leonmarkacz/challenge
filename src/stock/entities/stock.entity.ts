@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, IsNull, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { StockStatusEnum } from '../model/stock-status.enum';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString } from 'class-validator';

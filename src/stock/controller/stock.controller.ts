@@ -1,6 +1,5 @@
 import { Body, Controller, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
 import { StockService } from '../service/stock.service';
-import { UpdateStockDto } from '../dto/update-stock.dto';
 import { ApiBadRequestResponse, ApiBody, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { SellStockDto } from '../dto/sell-stock.dto';
 import { UnreserveStockDto } from '../dto/unreserve-stock.dto';
